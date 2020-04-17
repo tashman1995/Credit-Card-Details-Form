@@ -1,0 +1,386 @@
+$color-primary-light: #e2f6fb;
+$color-primary-dark: #d7f6ff;
+$color-grey-dark-1: #111;
+
+$border-radius: 3px;
+
+@import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@300;400;500&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
+
+@mixin center {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
+@mixin respond($breakpoint) {
+	@if $breakpoint == one {
+		@media only screen and (max-width: 28.75em) {
+			//360px not divided by 16 like the others
+			@content;
+		}
+	}
+
+	@if $breakpoint == two {
+		@media only screen and (max-width: 43.75em) {
+			//600px
+			@content;
+		}
+	}
+
+	@if $breakpoint == three {
+		@media only screen and (max-width: 64em) {
+			//900px / 16
+			@content;
+		}
+	}
+
+	@if $breakpoint == four {
+		@media only screen and (max-width: 84em) {
+			//900px / 16
+			@content;
+		}
+	}
+}
+
+// @include respond(four) {
+//     font-size: 56.25%; //1 rem = 9px, 9/16 = 56.25%
+// }
+
+* {
+	margin: 0;
+	padding: 0;
+}
+
+*,
+::after,
+::before {
+	box-sizing: inherit;
+}
+
+html {
+	box-sizing: border-box;
+    font-size: 62.5%; //1rem is 10px
+    min-height: 100vh;
+}
+
+body {
+	font-family: 'Open sans', sans-serif;
+	font-weight: 400;
+	line-height: 1.6;
+	background-image: linear-gradient(to right bottom, $color-primary-light, $color-primary-dark);
+	background-repeat: no-repeat;
+    color: $color-grey-dark-1;
+    
+}
+
+.container {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	margin: 15rem auto 0rem auto;
+	background-color: #fff;
+	border-radius: 1.5rem;
+	padding: 3rem;
+	box-shadow: 0rem 1rem 4rem rgba(0, 0, 0, .2);
+    width: 45rem;
+}
+
+.card {
+	margin-top: -35%;
+	width: 56*.75rem;
+	height: 35.4*.75rem;
+	font-family: 'Source Code Pro', monospace;
+    color: #eee;
+    perspective: 100rem;
+	-moz-perspective: 100rem;
+	position: relative;
+    transform: scale(.8);
+
+	&__side {
+		background: rgb(246, 41, 44);
+		background: linear-gradient(
+			225deg,
+			rgba(246, 41, 44, 1) 0%,
+			rgba(246, 41, 44, 1) 0%,
+			rgb(255, 85, 99) 47%,
+			rgba(246, 41, 44, 1) 100%
+		);
+		border-radius: 1.5rem;
+		height: inherit;
+		
+		display: flex;
+        flex-direction: column;
+        
+        box-shadow: 0rem 1rem 4rem rgba(0, 0, 0, .2);
+        // display: none;
+
+        //FUNCTIONALITY
+        position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+        backface-visibility: hidden;
+        transition: all 1s;
+
+        &--back {
+            transform: rotateY(180deg);
+        }
+    }
+    
+
+	&__logo {
+		margin-left: auto;
+		padding: .8rem;
+	}
+
+	&__logo-img {
+		height: 3rem;
+	}
+
+	&__contactless {
+		display: flex;
+		align-items: center;
+		margin-left: 3.5rem;
+		margin-top: 2.5rem;
+	}
+
+	&__contactless-img {
+		height: 3.8rem;
+		margin-right: 2rem;
+	}
+
+	&__cell-image {
+		height: 6rem;
+		width: 7rem;
+		margin-right: 2rem;
+	}
+
+	&__number {
+		font-size: 2.5rem;
+		letter-spacing: .5rem;
+		align-self: center;
+		font-family: 'Share Tech Mono', monospace;
+	}
+
+	&__number-text {
+        display: flex;
+	}
+
+	&__lower-third {
+		margin-top: auto;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		margin-left: 3rem;
+	}
+
+	&__holder-name {
+        
+        max-width: 17.5rem;
+        overflow: hidden;
+        // hyphens: auto;
+	}
+
+	&__holder-name,
+	&__expiry-date {
+        line-height: 1.1;
+		text-transform: uppercase;
+		font-size: 1.75rem;
+		letter-spacing: .2rem;
+    }
+    
+    &__expiry {
+        margin-left: auto;
+    }
+
+	&__mastercard-img {
+		height: 8rem;
+		margin-left: 1rem;
+		margin-right: 1rem;
+	}
+
+	
+
+	&__scan-bar {
+		background-color: #000;
+		width: 100%;
+		height: 6rem;
+		margin-top: 3rem;
+	}
+
+	&__cvv {
+		background-color: #fff;
+		height: 4rem;
+		display: flex;
+		margin: 0 1.5rem;
+		border-radius: .5rem;
+		overflow: hidden;
+	}
+
+	&__cvv-label {
+		margin: 1rem 2rem 0rem 1rem;
+		text-align: right;
+		color: #000;
+	}
+
+	&__cvv-input {
+		margin-left: auto;
+		width: 4rem;
+		border: none;
+		font-size: 3rem;
+		margin-bottom: 1rem;
+
+		&:focus {
+			outline: none;
+		}
+	}
+}
+
+.btn {
+	&,
+	&:link,
+	&:visited {
+		display: block;
+		width: 100%;
+		color: #fff;
+		background-color: rgb(255, 94, 97);
+        border: none;
+        height: 5rem;
+        border-radius: .5rem;
+        font-size: 2rem;
+        margin-top: 1rem;
+
+		outline: none;
+        cursor: pointer;
+        transition: all .2s;
+        box-shadow: 0 .6rem 1rem rgba(#000, .1);
+
+	}
+
+	&:hover,
+	&:focus {
+		transform: translateY(-.3rem);
+		box-shadow: 0 1rem 2rem rgba(#000, .2);
+		outline: none;
+
+		&::after {
+			background-color: #fff;
+			transform: scale(1.5);
+			opacity: 0;
+		}
+	}
+
+	&:active,
+	&:focus {
+		transform: translateY(-.1rem);
+		box-shadow: 0 .6rem 1rem rgba(#000, .2);
+	}
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    /* display: none; <- Crashes Chrome on hover */
+    -webkit-appearance: none;
+    margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+}
+
+input[type=number] {
+    -moz-appearance:textfield; /* Firefox */
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    
+    &__control {
+        position: relative;
+        &--cvv {
+            width: 30%;
+            margin-left: auto;
+        }
+    }
+
+    & label {
+        display: block;
+        font-weight: 500;
+        font-size: 1.2rem;
+    }
+
+    &__text-input, &__select-input {
+        height: 5rem;
+        border-radius: .5rem;
+        border: 1px solid #ddd;
+        margin-bottom: 2.5rem;
+        padding: 1.5rem;
+
+
+        &:focus {
+            outline: none;
+            border: 1px solid rgb(86, 193, 255);
+        }
+
+        &--success {
+            border: 1px solid rgb(120, 255, 86);
+        }
+
+        &--failure {
+            border: 1px solid rgb(255, 86, 86);
+        }
+
+        &--number {
+            letter-spacing: .3rem;
+        }
+
+        &--cvv {
+            letter-spacing: .5rem;
+        }
+
+        &::-webkit-input-placeholder {
+            letter-spacing: 0rem;
+        }
+        ::-moz-placeholder { /* Firefox 19+ */
+            letter-spacing: 0rem;
+        }
+        :-ms-input-placeholder { /* IE 10+ */
+            letter-spacing: 0rem;
+        }
+        :-moz-placeholder { /* Firefox 18- */
+            letter-spacing: 0rem;
+        }
+ 
+    }
+
+    &__card-error {
+        position: absolute;
+        top: 7rem;
+        left: 0;
+        display: block;
+        font-size: 1.1rem;
+        font-weight: 100;
+        line-height: 1.1;
+        margin-top: .2rem;
+        // display: none;
+    }
+
+    &__text-input {
+        width: 100%;
+    }
+
+    &__select-input {
+        width: 12rem;
+        &:last-of-type {
+            margin-left: .75rem;
+        }
+    }
+
+    &__lower {
+        width: 100%;
+        display: flex;
+    }
+    
+}
